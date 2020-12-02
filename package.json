@@ -1,0 +1,28 @@
+{
+  "name": "learn-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "ant-design-pro": "^2.3.2",
+    "antd": "^4.7.3",
+    "firebase": "^8.0.0",
+    "mobx": "^6.0.1",
+    "mobx-react": "^7.0.0",
+    "next": "9.5.3",
+    "next-transpile-modules": "^4.1.0",
+    "ng-zorro-antd": "^10.0.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-html5-camera-photo": "^1.5.4",
+    "react-three-fiber": "^5.1.4",
+    "three": "^0.121.1",
+    "three-gltf-loader": "^1.111.0",
+    "twilio": "^3.50.0",
+    "twilio-video": "^2.7.3"
+  }
+}
