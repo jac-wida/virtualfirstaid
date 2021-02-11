@@ -1,30 +1,30 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
-import BodyVisualizer from '../components/BodyVisualizer';
-import PicturesTab from '../components/Pictures';
-import PainPointsTab from '../components/PainPoints';
-import VideoTab from '../components/Video';
-import Basic from '../components/Basics'
+import BodyVisualizer from "../components/BodyVisualizer";
+import PicturesTab from "../components/Pictures";
+import PainPointsTab from "../components/PainPoints";
+import VideoTab from "../components/Video";
+import MessageTab from "../components/Message";
+import Basic from "../components/Basics";
 
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb } from "antd";
 
-import { Row, Col } from 'antd';
-import { Tabs, Divider } from 'antd';
+import { Row, Col } from "antd";
+import { Tabs, Divider } from "antd";
 
-import Cursor3D from '../models/cursor';
-import Pictures from '../models/pictures';
-import PainPoints from '../models/painPoints';
+import Cursor3D from "../models/cursor";
+import Pictures from "../models/pictures";
+import PainPoints from "../models/painPoints";
 
 const { TabPane } = Tabs;
 
 const { Sider, Header, Content, Footer } = Layout;
 
 const style = {
-  height: '100vh'
+  height: "100vh",
 };
-
 
 export default function Home({ room }) {
   const cursor = new Cursor3D(room);
@@ -37,73 +37,88 @@ export default function Home({ room }) {
 
   useEffect(() => {
     if (elementRef.current) {
-      setWidth(elementRef.current.getBoundingClientRect().width)
+      setWidth(elementRef.current.getBoundingClientRect().width);
     }
   }, []); //empty dependency array so it only runs once at render
 
-  const [ mode, setMode ] = useState('images');
-  const [ preMode, setPreMode ] = useState('images');
+  const [mode, setMode] = useState("images");
+  const [preMode, setPreMode] = useState("images");
 
-  if (preMode != mode && (mode == 'images' || mode == 'pain')) {
+  if (preMode != mode && (mode == "images" || mode == "pain")) {
     setPreMode(mode);
   }
 
-  const visualizer = <BodyVisualizer cursor={cursor} images={pictures} mode={preMode} painPoints={painPoints}/>;
-  const video = <VideoTab room={room}/>;
+  const visualizer = (
+    <BodyVisualizer
+      cursor={cursor}
+      images={pictures}
+      mode={preMode}
+      painPoints={painPoints}
+    />
+  );
+  const video = <VideoTab room={room} />;
+  const message = <MessageTab room={room} />;
 
   const mobile = width < 1000;
 
   const tabs = (
-    <Tabs type="card"  style={{ height: '100%', display:'relative' }} activeKey={mode} onChange={(e) => {setMode(e)}}>
-      {mobile ? (<>
-        <TabPane tab="Video" key="video">
-          { video }
-        </TabPane>
-        <TabPane id="hohohihi" tab="Avatar" key="visualizer">
-          { visualizer }
-        </TabPane>
-      </>):null}
-      
-      <TabPane tab="Pictures" key="images">
+    <Tabs
+      type='card'
+      style={{ height: "100%", display: "relative" }}
+      activeKey={mode}
+      onChange={(e) => {
+        setMode(e);
+      }}
+    >
+      {mobile ? (
+        <>
+          <TabPane tab='Video' key='video'>
+            {video}
+          </TabPane>
+          <TabPane tab='message' key='message'>
+            {message}
+          </TabPane>
+          <TabPane id='hohohihi' tab='Avatar' key='visualizer'>
+            {visualizer}
+          </TabPane>
+        </>
+      ) : null}
+
+      <TabPane tab='Pictures' key='images'>
         <PicturesTab cursor={cursor} pictures={pictures} />
       </TabPane>
-      <TabPane tab="Pain" key="pain">
-        <PainPointsTab cursor={cursor} painPoints={painPoints}/>
+      <TabPane tab='Pain' key='pain'>
+        <PainPointsTab cursor={cursor} painPoints={painPoints} />
       </TabPane>
-      <TabPane tab="Basic" key="basic">
-        <Basic cursor={cursor}/>
+      <TabPane tab='Basic' key='basic'>
+        <Basic cursor={cursor} />
       </TabPane>
-      
     </Tabs>
-  )
+  );
 
-  const content = (mobile ?
+  const content = mobile ? (
     tabs
-  : (
-    <Row style={{ height: '100%' }}>
-      <Col span={4}>
-        { video }
-
-      </Col>
-      <Col span={8}>
-        { visualizer }
-      </Col>
+  ) : (
+    <Row style={{ height: "100%" }}>
+      <Col span={4}>{video}</Col>
+      <Col span={8}>{visualizer}</Col>
       <Col span={12}>
-        <div className="card-container">
-          { tabs }
-          </div>
-        </Col>
+        <div className='card-container'>{tabs}</div>
+      </Col>
     </Row>
-  ));
+  );
 
   return (
-  <Layout className="layout" style={style}>
-    <Content style={{ padding: '30px', height: '100%'}}>
-      <div ref={elementRef} className="site-layout-content" style={{ height: '100%'}}>
-        { content }
-      </div>
-    </Content>
-  </Layout>
-  )
-
+    <Layout className='layout' style={style}>
+      <Content style={{ padding: "30px", height: "100%" }}>
+        <div
+          ref={elementRef}
+          className='site-layout-content'
+          style={{ height: "100%" }}
+        >
+          {content}
+        </div>
+      </Content>
+    </Layout>
+  );
 }

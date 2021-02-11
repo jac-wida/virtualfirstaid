@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined } from "@ant-design/icons";
 
-import { Button, Radio } from 'antd';
+import { Button, Radio } from "antd";
 
-const Participant = ({ participant, close}) => {
+const Participant = ({ participant, close }) => {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
 
@@ -65,13 +65,25 @@ const Participant = ({ participant, close}) => {
     }
   }, [audioTracks]);
 
-  console.log(close)
+  console.log(close);
 
   return (
-    <div className="participant" style={{ width: '100%' }}>
-      <h3>{participant.identity} {close?<Button type="primary" shape="circle" onClick={close} icon={<CloseOutlined />} />:''}</h3>
-      <video ref={videoRef} autoPlay={true} style={{ width: '100%' }}/>
-      <audio ref={audioRef} autoPlay={true} muted={true} />
+    <div className='participant' style={{ width: "100%" }}>
+      <h3>
+        {participant.identity}{" "}
+        {close ? (
+          <Button
+            type='primary'
+            shape='circle'
+            onClick={close}
+            icon={<CloseOutlined />}
+          />
+        ) : (
+          ""
+        )}
+      </h3>
+      <video ref={videoRef} autoPlay={true} style={{ width: "100%" }} />
+      <audio ref={audioRef} autoPlay={true} />
     </div>
   );
 };

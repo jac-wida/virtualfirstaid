@@ -14,20 +14,20 @@ import {
 } from "mobx";
 import { observer } from "mobx-react-lite";
 import { Divider, Image, Card, List, Modal, Button, Tooltip } from "antd";
-import { WechatOutlined } from "@ant-design/icons";
+import { VideoCameraAddOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, WechatOutlined } from "@ant-design/icons";
 import { Spin, Space } from "antd";
 import Room from "./Room";
 
-const suffix = (
-  <WechatOutlined
-    style={{
-      fontSize: 20,
-      color: "#1890ff",
-    }}
-  />
-);
+// const suffix = (
+//   <VideoCameraAddOutlined
+//     style={{
+//       fontSize: 16,
+//       color: "#1890ff",
+//     }}
+//   />
+// );
 
 export default observer(({ room }) => {
   const [token, setToken] = useState(null);
@@ -62,7 +62,7 @@ export default observer(({ room }) => {
   if (token === null || token == "wait") {
     return (
       <>
-        <Input.Search
+        {/* <Input.Search
           size='large'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -72,7 +72,11 @@ export default observer(({ room }) => {
           suffix={suffix}
           prefix={<UserOutlined />}
           onSearch={handleSubmit}
-        />
+        /> */}
+
+        <Button type='primary' shape='circle' size='large'>
+          <WechatOutlined />
+        </Button>
       </>
     );
   } else {

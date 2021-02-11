@@ -13,7 +13,7 @@
     "firebase": "^8.0.0",
     "mobx": "^6.0.1",
     "mobx-react": "^7.0.0",
-    "next": "9.5.3",
+    "next": "^10.0.6",
     "next-transpile-modules": "^4.1.0",
     "ng-zorro-antd": "^10.0.2",
     "react": "16.13.1",
@@ -22,7 +22,7 @@
     "react-three-fiber": "^5.1.4",
     "three": "^0.121.1",
     "three-gltf-loader": "^1.111.0",
-    "twilio": "^3.50.0",
+    "twilio": "^3.56.0",
     "twilio-video": "^2.7.3"
   }
 }
